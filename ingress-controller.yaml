@@ -23,16 +23,16 @@ metadata:
   name: nginx-lal-nonprod-ingress-serviceaccount
   namespace: ingress-lal-nonprod
   labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/name: ingress-lal-nonprod-nginx
+    app.kubernetes.io/part-of: ingress-lal-nginx
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
   name: nginx-ingress-clusterrole
   labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/name: ingress-lal-nonprod-nginx
+    app.kubernetes.io/part-of: ingress-lal-nginx
 rules:
   - apiGroups:
       - ""
@@ -80,7 +80,6 @@ rules:
       - ingresses/status
     verbs:
       - update
-
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: Role
@@ -88,8 +87,8 @@ metadata:
   name: nginx-ingress-role
   namespace: ingress-lal-nonprod
   labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/name: ingress-lal-nonprod-nginx
+    app.kubernetes.io/part-of: ingress-lal-nginx
 rules:
   - apiGroups:
       - ""
@@ -125,7 +124,6 @@ rules:
       - endpoints
     verbs:
       - get
-
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
@@ -133,8 +131,8 @@ metadata:
   name: nginx-ingress-role-nisa-binding
   namespace: ingress-lal-nonprod
   labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/name: ingress-lal-nonprod-nginx
+    app.kubernetes.io/part-of: ingress-lal-nginx
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -142,15 +140,15 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: nginx-lal-nonprod-ingress-serviceaccount
-  namespace: ingress-lal-nonprod
+    namespace: ingress-lal-nonprod
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
   name: nginx-ingress-clusterrole-nisa-binding
   labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/name: ingress-lal-nonprod-nginx
+    app.kubernetes.io/part-of: ingress-lal-nginx
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -158,5 +156,5 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: nginx-lal-nonprod-ingress-serviceaccount
-    namespace: ingress-nginx
+    namespace: ingress-lal-nonprod
 ---
