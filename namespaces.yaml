@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    environment: prod
+    tier: backend
+  name: ingress-lal-prod
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    environment: nonprod
+    tier: backend
+  name: ingress-lal-nonprod
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    environment: prod
+    tier: backend
+  name: ingress-gig-prod
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    environment: nonprod
+    tier: backend
+  name: ingress-gig-nonprod
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    environment: prod
+    tier: backend
+  name: ingress-aaa-prod
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    environment: nonprod
+    tier: backend
+  name: ingress-aaa-nonprod
