@@ -20,7 +20,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: nginx-ingress-serviceaccount
+  name: nginx-lal-nonprod-ingress-serviceaccount
   namespace: ingress-lal-nonprod
   labels:
     app.kubernetes.io/name: ingress-nginx
@@ -141,7 +141,7 @@ roleRef:
   name: nginx-ingress-role
 subjects:
   - kind: ServiceAccount
-    name: nginx-ingress-serviceaccount
+    name: nginx-lal-nonprod-ingress-serviceaccount
   namespace: ingress-lal-nonprod
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -157,6 +157,6 @@ roleRef:
   name: nginx-ingress-clusterrole
 subjects:
   - kind: ServiceAccount
-    name: nginx-ingress-serviceaccount
+    name: nginx-lal-nonprod-ingress-serviceaccount
     namespace: ingress-nginx
 ---
