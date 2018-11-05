@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sample-ingress
+  namespace: ingress-lal-nonprod
+  annotations:
+    kubernetes.io/ingress.class: "ingress-lal-nonprod"
+spec:
+  rules:
+  - host: sample.lal-nonprod.gig.aws.cps.vodafone.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: sample
+          servicePort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sample
+  namespace: ingress-lal-nonprod
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    k8s-app: sample
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-deployment
+spec:
+  selector:
+    matchLabels:
+      k8s-app: sample
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        k8s-app: sample
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
