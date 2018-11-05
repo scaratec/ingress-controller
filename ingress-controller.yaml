@@ -15,7 +15,7 @@ spec:
     targetPort: 443
   type: LoadBalancer
   selector:
-    k8s-app: ingress-lal-nonprod
+    app.kubernetes.io/name: ingress-lal-nonprod-nginx
 ---
 apiVersion: v1
 kind: ServiceAccount
