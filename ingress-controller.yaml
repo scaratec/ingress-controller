@@ -145,7 +145,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
-  name: nginx-ingress-clusterrole-nisa-binding
+  name: nginx-lal-nonprod-ingress-clusterrole-nisa-binding
   labels:
     app.kubernetes.io/name: ingress-lal-nonprod-nginx
     app.kubernetes.io/part-of: ingress-lal-nginx
@@ -157,6 +157,15 @@ subjects:
   - kind: ServiceAccount
     name: nginx-lal-nonprod-ingress-serviceaccount
     namespace: ingress-lal-nonprod
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginx-configuration
+  namespace: ingress-lal-nonprod
+  labels:
+    app.kubernetes.io/name: ingress-lal-nonprod-nginx
+    app.kubernetes.io/part-of: ingress-lal-nginx
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -181,7 +190,7 @@ spec:
         prometheus.io/port: "10254"
         prometheus.io/scrape: "true"
     spec:
-      serviceAccountName: nginx-ingress-serviceaccount
+      serviceAccountName: nginx-lal-nonprod-ingress-serviceaccount
       containers:
         - name: nginx-ingress-controller
           image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.20.0
